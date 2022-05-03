@@ -8,13 +8,12 @@ The Lumberjack protocol is used by the Elasticsearch beats agents, like Winlogbe
 
 This plugin is intended to start a server listener and read the message batches as an input to Benthos.
 
-To test, configure the input, provide the following fields:
+To test, configure the input with the following fields:
+- bind: "<ip>:<port>"
+- svrCert: "<path to server cert file for service TLS>"
+- privKey: "<patch to server cert private key>"
+- caCert: "<patch to ca cert, if using client auth>"
+- cliAuth: false/true
 
-  input:
-    label: "lumberjack"
-    lumberjack:
-      bind:   ":5044"
-      svrCert:  ""
-      privKey:  ""
-      caCert: ""
-      cliAuth: false
+To send events to the input listener, configure the Winlogbeat client's Logstash input section.
+  
