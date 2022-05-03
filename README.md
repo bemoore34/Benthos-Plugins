@@ -16,4 +16,7 @@ To test, configure the input with the following fields:
 - cliAuth: false/true
 
 To send events to the input listener, configure the Winlogbeat client's Logstash input section.
+
+The plugin leverages the Elastic/go-lumber project.
+For reference, there is an example server implementation at https://github.com/elastic/go-lumber/blob/main/cmd/tst-lj/main.go
   
