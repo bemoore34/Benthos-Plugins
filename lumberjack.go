@@ -91,7 +91,7 @@ func (l *lumberJackInput) ReadBatch(ctx context.Context) (service.MessageBatch, 
 		msg.SetStructured(v)
 		batch = append(batch, msg)
 	}
-	return service.MessageBatch(batch), func(ctx context.Context, err error) error {
+	return batch, func(ctx context.Context, err error) error {
 		return nil
 	}, nil
 }
