@@ -66,12 +66,12 @@ func (l *lumberJackInput) Connect(ctx context.Context) error {
 	}
   
 	// signal channel to capture an interrupt (ctrl-c) to gracefully stop the server.
+	// Note - I can't get the input Close method to fire on ctrl-c.
 	l.sig = make(chan os.Signal, 1)
 	signal.Notify(l.sig, os.Interrupt)
 	go func() {
 		<-l.sig
 		_ = ls.Close()
-		os.Exit(0)
 	}()
 	l.ljServer = ls
 	return nil
@@ -96,10 +96,9 @@ func (l *lumberJackInput) ReadBatch(ctx context.Context) (service.MessageBatch, 
 	}, nil
 }
 
-// I don't know if I should be using this - couldn't get it to stop the server, so using the 
-// signal channel in the Connect method.
+// Couldn't get this method to run - doesn't stop server gracefully.
 func (l *lumberJackInput) Close(ctx context.Context) error {
-	//_ = l.ljServer.Close()
+	_ = l.ljServer.Close()
 	//os.Exit(0)
 	return nil
 }
