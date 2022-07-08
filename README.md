@@ -20,3 +20,33 @@ To send events to the input listener, configure the Winlogbeat client's Logstash
 The plugin leverages the Elastic/go-lumber project.
 For reference, there is an example server implementation at https://github.com/elastic/go-lumber/blob/main/cmd/tst-lj/main.go
   
+**Syslog AServer Input**
+
+This plugin starts a syslog listener as an input for Benthos (TCP or UDP, and support TLS).
+
+I have tested it with the stdout and Pulsar outputs. To quickly test the service with the stdout output, can use the following config file:
+
+```
+input:
+ label: "syslog"
+ sysloginput:
+   bind: <IP_Addr>:<port>
+   rfc: Automatic
+   protocol: UDP
+   svrCert: ""
+   privKey: ""
+   caCert: ""
+   useTLS: false
+   cliAuth: false
+buffer:
+ none: {}
+pipeline:
+ threads: -1
+ processors: []
+output:
+ label: "stdout"
+ stdout:
+   codec: lines
+ 
+shutdown_timeout: 10s
+```
