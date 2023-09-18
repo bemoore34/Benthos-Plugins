@@ -6,7 +6,7 @@ Shared plugins for feedback
 
 The Lumberjack protocol is used by the Elasticsearch beats agents, like Winlogbeat, to send batches of messages to Logstash, for example.
 
-This plugin is intended to start a server listener and read the message batches as an input to Benthos.
+This plugin starts a server listener and reads message batches as an input to Benthos. This allows Benthos to replace Logstash and route and transform logs using all the Benthos goodness.
 
 To test, configure the input with the following fields:
 - bind: "[ip]:\<port\>"
@@ -15,10 +15,11 @@ To test, configure the input with the following fields:
 - caCert: "\<path to ca cert, if using client auth\>"
 - cliAuth: false/true
 
-To send events to the input listener, configure the Winlogbeat client's Logstash input section.
+To send Windows Log Events to the input listener, configure the Winlogbeat client's Logstash input section.
 
 The plugin leverages the Elastic/go-lumber project.
 For reference, there is an example server implementation at https://github.com/elastic/go-lumber/blob/main/cmd/tst-lj/main.go
+
   
 **Syslog Server Input**
 
